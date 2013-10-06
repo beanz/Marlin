@@ -733,8 +733,10 @@ static void lcd_control_temperature_menu()
     MENU_ITEM_EDIT(int3, MSG_FAN_SPEED, &fanSpeed, 0, 255);
 #if defined AUTOTEMP && (TEMP_SENSOR_0 != 0)
     MENU_ITEM_EDIT(bool, MSG_AUTOTEMP, &autotemp_enabled);
+#if TEMP_SENSOR_0 != 0
     MENU_ITEM_EDIT(float3, MSG_MIN, &autotemp_min, 0, HEATER_0_MAXTEMP - 15);
     MENU_ITEM_EDIT(float3, MSG_MAX, &autotemp_max, 0, HEATER_0_MAXTEMP - 15);
+#endif
     MENU_ITEM_EDIT(float32, MSG_FACTOR, &autotemp_factor, 0.0, 1.0);
 #endif
 #ifdef PIDTEMP
