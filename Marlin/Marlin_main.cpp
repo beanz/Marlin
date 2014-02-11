@@ -259,6 +259,15 @@ float bed_level[ACCURATE_BED_LEVELING_POINTS][ACCURATE_BED_LEVELING_POINTS];
 const char axis_codes[NUM_AXIS] = {'X', 'Y', 'Z', 'E'};
 static float destination[NUM_AXIS] = {  0.0, 0.0, 0.0, 0.0};
 static float offset[3] = {0.0, 0.0, 0.0};
+static float bed_level[7][7] = {
+  { 1.36, 1.36, 1.43, 1.34, 1.17, 0.97, 0.74,  },
+  { 1.24, 1.36, 1.29, 1.20, 1.08, 0.97, 0.74,  },
+  { 1.24, 1.25, 1.20, 1.10, 0.99, 0.89, 0.74,  },
+  { 1.14, 1.10, 1.09, 1.00, 0.91, 0.81, 0.70,  },
+  { 1.12, 1.06, 1.00, 0.91, 0.83, 0.75, 0.64,  },
+  { 1.12, 1.05, 0.96, 0.85, 0.76, 0.72, 0.64,  },
+  { 1.05, 1.05, 0.95, 0.84, 0.73, 0.72, 0.64,  },
+};
 static bool home_all_axis = true;
 static float feedrate = 1500.0, next_feedrate, saved_feedrate;
 static long gcode_N, gcode_LastN, Stopped_gcode_LastN = 0;
