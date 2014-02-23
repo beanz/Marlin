@@ -126,12 +126,23 @@
 // Effective X/Y positions of the three vertical towers.
 #define SIN_60 0.8660254037844386
 #define COS_60 0.5
-#define DELTA_TOWER1_X -SIN_60*DELTA_RADIUS // front left tower
-#define DELTA_TOWER1_Y -COS_60*DELTA_RADIUS
-#define DELTA_TOWER2_X SIN_60*DELTA_RADIUS // front right tower
-#define DELTA_TOWER2_Y -COS_60*DELTA_RADIUS
-#define DELTA_TOWER3_X 0.0 // back middle tower
-#define DELTA_TOWER3_Y DELTA_RADIUS
+
+//#define DELTA_TOWER1_X -SIN_60*DELTA_RADIUS // front left tower
+//#define DELTA_TOWER1_Y -COS_60*DELTA_RADIUS
+//#define DELTA_TOWER2_X SIN_60*DELTA_RADIUS // front right tower
+//#define DELTA_TOWER2_Y -COS_60*DELTA_RADIUS
+//#define DELTA_TOWER3_X 0.0 // back middle tower
+//#define DELTA_TOWER3_Y DELTA_RADIUS
+
+#define DELTA_XA -105.958
+#define DELTA_YA -61.028
+#define DELTA_XC 0.028
+#define DELTA_TOWER1_X DELTA_XA // front left tower
+#define DELTA_TOWER1_Y DELTA_YA
+#define DELTA_TOWER2_X -DELTA_XA // front right tower
+#define DELTA_TOWER2_Y DELTA_YA
+#define DELTA_TOWER3_X DELTA_XC // back middle tower
+#define DELTA_TOWER3_Y (-2*DELTA_YA)
 
 // Diagonal rod squared
 #define DELTA_DIAGONAL_ROD_2 pow(DELTA_DIAGONAL_ROD,2)
