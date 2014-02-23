@@ -134,9 +134,9 @@
 //#define DELTA_TOWER3_X 0.0 // back middle tower
 //#define DELTA_TOWER3_Y DELTA_RADIUS
 
-#define DELTA_XA -105.958
-#define DELTA_YA -61.028
-#define DELTA_XC 0.028
+#define DELTA_XA -106.046
+#define DELTA_YA -60.993
+#define DELTA_XC 0.012
 #define DELTA_TOWER1_X DELTA_XA // front left tower
 #define DELTA_TOWER1_Y DELTA_YA
 #define DELTA_TOWER2_X -DELTA_XA // front right tower
