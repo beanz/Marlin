@@ -251,6 +251,7 @@ float delta[3] = {0.0, 0.0, 0.0};
 
 #ifdef NONLINEAR_BED_LEVELING
 float bed_level[ACCURATE_BED_LEVELING_POINTS][ACCURATE_BED_LEVELING_POINTS];
+float touch_level = 1023;
 #endif
 
 //===========================================================================
@@ -883,8 +884,12 @@ static void set_bed_level_equation(float z_at_xLeft_yFront, float z_at_xRight_yF
 }
 #endif // ACCURATE_BED_LEVELING
 
+void calibrate_touch_level() {
+  touch_level = rawBedSample() - 50;
+}
+
 bool touching_print_surface() {
-  return rawBedSample() < 800; // ADC goes from 0 to 1023
+  return rawBedSample() < touch_level; // ADC goes from 0 to 1023
 }
 
 static void run_z_probe() {
@@ -1606,6 +1611,7 @@ void process_commands()
             }
             #endif //NONLINEAR_BED_LEVELING
 
+            calibrate_touch_level();
             int probePointCounter = 0;
             for (int yCount=0; yCount < ACCURATE_BED_LEVELING_POINTS; yCount++)
             {
