@@ -885,7 +885,7 @@ static void set_bed_level_equation(float z_at_xLeft_yFront, float z_at_xRight_yF
 #endif // ACCURATE_BED_LEVELING
 
 void calibrate_touch_level() {
-  touch_level = rawBedSample() - 50;
+  touch_level = rawBedSample() - 20;
 }
 
 bool touching_print_surface() {
