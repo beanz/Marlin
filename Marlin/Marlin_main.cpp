@@ -1035,7 +1035,7 @@ static void run_z_probe() {
 
 #ifdef DELTA
   #ifdef FSR_BED_LEVELING
-    feedrate = 600; //mm/min
+    feedrate = homing_feedrate[Z_AXIS]/20;
     float step = 0.05;
     int direction = -1;
     // Consider the glass touched if the raw ADC value is reduced by 5% or more.
