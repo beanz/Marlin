@@ -897,7 +897,7 @@ static void run_z_probe() {
 
 #ifdef DELTA
   #ifdef FSR_BED_LEVELING
-    feedrate = 600; //mm/min
+    feedrate = homing_feedrate[Z_AXIS]/20;
     float step = 0.05;
     int direction = -1;
     while (touching_print_surface()) {
