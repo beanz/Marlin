@@ -677,8 +677,10 @@ static void lcd_move_menu_01mm()
 }
 
 #ifdef DEMO_MOVE_MENU
+static unsigned long timeoutToStatus = 0;
 static void lcd_move_demo_menu()
 {
+    timeoutToStatus = millis() + 86400*1000; // don't return to status
     START_MENU();
     MENU_ITEM(gcode, MSG_MOVE_Z50, PSTR("G0 Z50"));
     MENU_ITEM(gcode, MSG_MOVE_Z40, PSTR("G0 Z40"));
@@ -1125,7 +1127,9 @@ void lcd_init()
 
 void lcd_update()
 {
+#ifndef DEMO_MOVE_MENU
     static unsigned long timeoutToStatus = 0;
+#endif
 
     #ifdef LCD_HAS_SLOW_BUTTONS
     slow_buttons = lcd_implementation_read_slow_buttons(); // buttons which take too long to read in interrupt context
