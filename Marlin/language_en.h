@@ -127,4 +127,15 @@
 
 #define MSG_RECTRACT                        "Rectract"
 
+#ifdef DEMO_MOVE_MENU
+#define MSG_MOVE_DEMO                       "Motion Demo"
+#define MSG_MOVE_Z40                        "G0 Z40"
+#define MSG_MOVE_Z50                        "G0 Z50"
+#define MSG_MOVE_X0Y0                       "G0 X0 Y0"
+#define MSG_MOVE_XM50YM50                   "G0 X-50 Y-50"
+#define MSG_MOVE_XM50YP50                   "G0 X-50 Y50"
+#define MSG_MOVE_XP50YP50                   "G0 X50 Y50"
+#define MSG_MOVE_XP50YM50                   "G0 X50 Y-50"
+#endif
+
 #endif // LANGUAGE_EN_H

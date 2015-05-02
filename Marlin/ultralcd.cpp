@@ -676,6 +676,27 @@ static void lcd_move_menu_01mm()
     lcd_move_menu_axis();
 }
 
+#ifdef DEMO_MOVE_MENU
+static void lcd_move_demo_menu()
+{
+    START_MENU();
+    MENU_ITEM(gcode, MSG_MOVE_Z50, PSTR("G0 Z50"));
+    MENU_ITEM(gcode, MSG_MOVE_Z40, PSTR("G0 Z40"));
+    MENU_ITEM(gcode, MSG_MOVE_X0Y0, PSTR("G0 X0 Y0"));
+    MENU_ITEM(gcode, MSG_MOVE_XM50YM50, PSTR("G0 X-50 Y-50"));
+    MENU_ITEM(gcode, MSG_MOVE_XM50YP50, PSTR("G0 X-50 Y50"));
+    MENU_ITEM(gcode, MSG_MOVE_XP50YP50, PSTR("G0 X50 Y50"));
+    MENU_ITEM(gcode, MSG_MOVE_XP50YM50, PSTR("G0 X50 Y-50"));
+    END_MENU();
+}
+static void lcd_move_demo_menu_wrapper()
+{
+    enquecommand_P((PSTR("G28"))); // move all axis home
+    enquecommand_P((PSTR("G0 Z40 F5000"))); // move and set feed rate
+    lcd_goto_menu(lcd_move_demo_menu);
+}
+#endif
+
 static void lcd_move_menu()
 {
     START_MENU();
@@ -683,6 +704,9 @@ static void lcd_move_menu()
     MENU_ITEM(submenu, MSG_MOVE_10MM, lcd_move_menu_10mm);
     MENU_ITEM(submenu, MSG_MOVE_1MM, lcd_move_menu_1mm);
     MENU_ITEM(submenu, MSG_MOVE_01MM, lcd_move_menu_01mm);
+#ifdef DEMO_MOVE_MENU
+    MENU_ITEM(function, MSG_MOVE_DEMO, lcd_move_demo_menu_wrapper);
+#endif
     //TODO:X,Y,Z,E
     END_MENU();
 }

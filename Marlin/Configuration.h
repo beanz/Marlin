@@ -822,7 +822,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 
 
-
+#define DEMO_MOVE_MENU
 
 #include "Configuration_adv.h"
 #include "thermistortables.h"
