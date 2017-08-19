@@ -698,7 +698,7 @@
  * Example: `M851 Z-5` with a CLEARANCE of 4  =>  9mm from bed to nozzle.
  *     But: `M851 Z+1` with a CLEARANCE of 2  =>  2mm from bed to nozzle.
  */
-#define Z_CLEARANCE_DEPLOY_PROBE   10 // Z Clearance for Deploy/Stow
+#define Z_CLEARANCE_DEPLOY_PROBE    5 // Z Clearance for Deploy/Stow
 #define Z_CLEARANCE_BETWEEN_PROBES  5 // Z Clearance between probe points
 
 // For M851 give a range for adjusting the Z probe offset
@@ -761,11 +761,11 @@
 // @section machine
 
 // Travel limits after homing (units are in mm)
-#define X_MIN_POS -90
-#define Y_MIN_POS -80
+#define X_MIN_POS 0
+#define Y_MIN_POS 0
 #define Z_MIN_POS 0
-#define X_MAX_POS 90
-#define Y_MAX_POS 80
+#define X_MAX_POS 180
+#define Y_MAX_POS 160
 #define Z_MAX_POS 120
 
 // If enabled, axes won't move below MIN_POS in response to movement commands.
@@ -858,10 +858,10 @@
   #define GRID_MAX_POINTS_Y GRID_MAX_POINTS_X
 
   // Set the boundaries for probing (where the probe can reach).
-  #define LEFT_PROBE_BED_POSITION -50
-  #define RIGHT_PROBE_BED_POSITION 50
-  #define BACK_PROBE_BED_POSITION 50
-  #define FRONT_PROBE_BED_POSITION -50
+  #define LEFT_PROBE_BED_POSITION 40
+  #define RIGHT_PROBE_BED_POSITION 140
+  #define BACK_PROBE_BED_POSITION 130
+  #define FRONT_PROBE_BED_POSITION 30
 
   // The Z probe minimum outer margin (to validate G29 parameters).
   #define MIN_PROBE_EDGE 10
@@ -953,7 +953,7 @@
 // @section homing
 
 // The center of the bed is at (X=0, Y=0)
-#define BED_CENTER_AT_0_0
+//#define BED_CENTER_AT_0_0
 
 // Manually set the home position. Leave these undefined for automatic settings.
 // For DELTA this is the top-center of the Cartesian print volume.
