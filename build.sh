@@ -2,25 +2,31 @@
 
 set -e
 
-TEST=0
-if [ -n "$1" -a "x$1" = "x-n" ]; then
-  TEST=1
+MODE=upload
+if [ -n "${1:-}" ] && [ "x${1:-}" = "x-n" ]; then
+  MODE=verify
+else
+  if ! git diff-index --quiet HEAD -- ; then
+    echo "there are local changes; forcing verify mode"
+    MODE=verify
+  fi
 fi
 
-( rm -f src ; ln -sf Marlin src ) || true
+echo $MODE
 
-echo cleaning
-ino clean
+echo cleaning old build
+rm -rf .build
 
-echo removing .pde file
-rm -f Marlin/Marlin.pde
+echo building for $MODE
+$HOME/Tmp/arduino-1.6.11/arduino \
+  --$MODE \
+  --board arduino:avr:mega:cpu=atmega2560 \
+  --pref build.path=.build --preserve-temp-files \
+  --port  /dev/ttyACM0 \
+  Marlin/Marlin.ino
 
-echo building
-ino build
-
-if [ $TEST = "1" ]; then
-  git checkout -- Marlin/Marlin.pde
-  rm -f src
+if [ "${MODE}" = 'verify' ]; then
+  echo "verify mode; not recording branch"
   exit
 fi
 
@@ -32,17 +38,9 @@ git checkout -b ${BRANCH}
 echo adding built files
 git add .build
 
-echo removing .pde from git
-#git rm Marlin/Marlin.pde
-
 echo committing build
-git commit -m "Add build before upload."
-
-echo uploading
-ino upload
+git commit -m "Add uploaded build"
 
 echo checking out ${CURRENT} again
 git checkout -- .
 git checkout ${CURRENT}
-
-rm -f src
