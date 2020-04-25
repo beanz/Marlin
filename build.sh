@@ -2,33 +2,12 @@
 
 set -e
 
-MODE=upload
-if [ -n "${1:-}" ] && [ "x${1:-}" = "x-n" ]; then
-  MODE=verify
-else
-  if ! git diff-index --quiet HEAD -- ; then
-    echo "there are local changes; forcing verify mode"
-    MODE=verify
-  fi
+PATH=~/Tmp/arduino-1.8.10:$PATH platformio run -e megaatmega2560
+if [ -n "$1" -a "x$1" = "x-n" ]; then
+  exit 0
 fi
 
-echo $MODE
-
-echo cleaning old build
-rm -rf .build
-
-echo building for $MODE
-$HOME/Tmp/arduino-1.6.11/arduino \
-  --$MODE \
-  --board arduino:avr:mega:cpu=atmega2560 \
-  --pref build.path=.build --preserve-temp-files \
-  --port  /dev/ttyACM0 \
-  Marlin/Marlin.ino
-
-if [ "${MODE}" = 'verify' ]; then
-  echo "verify mode; not recording branch"
-  exit
-fi
+echo saving
 
 CURRENT=`git rev-parse --abbrev-ref HEAD`
 BRANCH=builds/${CURRENT}-`date +%Y%m%d-%H%M%S`
@@ -36,10 +15,13 @@ echo making build branch ${BRANCH} from ${CURRENT}
 git checkout -b ${BRANCH}
 
 echo adding built files
-git add .build
+git add -f .pio*
 
 echo committing build
-git commit -m "Add uploaded build"
+git commit -m "Add build before upload."
+
+echo uploading
+PATH=~/Tmp/arduino-1.8.10:$PATH platformio run --target upload -e megaatmega2560
 
 echo checking out ${CURRENT} again
 git checkout -- .
