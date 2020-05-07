@@ -306,12 +306,12 @@
 // When temperature exceeds max temp, your heater will be switched off.
 // This feature exists to protect your hotend from overheating accidentally, but *NOT* from thermistor short/failure!
 // You should use MINTEMP for thermistor short/failure protection.
-#define HEATER_0_MAXTEMP 275
+#define HEATER_0_MAXTEMP 245
 #define HEATER_1_MAXTEMP 275
 #define HEATER_2_MAXTEMP 275
 #define HEATER_3_MAXTEMP 275
 #define HEATER_4_MAXTEMP 275
-#define BED_MAXTEMP 150
+#define BED_MAXTEMP 120
 
 //===========================================================================
 //============================= PID Settings ================================
@@ -335,10 +335,15 @@
 
   // If you are using a pre-configured hotend then you can use one of the value sets by uncommenting it
 
+  // AM - E3Dv6 lite
+  #define  DEFAULT_Kp 23.71
+  #define  DEFAULT_Ki 1.71
+  #define  DEFAULT_Kd 82.05
+
   // E3Dv6
-  #define  DEFAULT_Kp 30.69
-  #define  DEFAULT_Ki 2.51
-  #define  DEFAULT_Kd 93.65
+  //#define  DEFAULT_Kp 30.69
+  //#define  DEFAULT_Ki 2.51
+  //#define  DEFAULT_Kd 93.65
 
   // Ultimaker
   //#define  DEFAULT_Kp 22.2
